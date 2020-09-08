@@ -19,6 +19,7 @@ class _RegisterState extends State<Register> {
   bool loading = false;
   bool _isPasswordHidden = true;
   SignInUser signUser = SignInUser();
+  int _userRole = 1;
   List<dynamic> collaborators = [];
 
   @override
@@ -76,6 +77,13 @@ class _RegisterState extends State<Register> {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       child: _buildePasswordTextField(),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.grey)),
+                      child: _buildeUserRoleTextField(),
                     ),
                     Container(
                         margin: EdgeInsets.only(bottom: 20),
@@ -199,31 +207,23 @@ class _RegisterState extends State<Register> {
         ));
   }
 
-  // Widget _buildTextField(String hintText) {
-  //   return TextField(
-  //     obscureText: true,
-  //     decoration: InputDecoration(
-  //       border: OutlineInputBorder(borderRadius: BorderRadius.circular(7.0)),
-  //       focusedBorder: OutlineInputBorder(
-  //         borderSide: const BorderSide(color: Colors.black, width: 1.0),
-  //         borderRadius: BorderRadius.circular(7.0),
-  //       ),
-  //       hintText: hintText,
-  //       suffixIcon: hintText == 'Contraseña'
-  //           ? IconButton(
-  //               onPressed: () {
-  //                 setState(() {
-  //                   _isPasswordHidden = !_isPasswordHidden;
-  //                 });
-  //               },
-  //               icon: _isPasswordHidden == true
-  //                   ? Icon(Icons.visibility_off, color: Colors.grey)
-  //                   : Icon(Icons.visibility, color: Colors.grey),
-  //             )
-  //           : null,
-  //     ),
-  //   );
-  // }
+  Widget _buildeUserRoleTextField() {
+    return Container(
+        padding: EdgeInsets.only(left: 10, right: 10),
+        child: DropdownButtonHideUnderline(
+            child: DropdownButton(
+                value: _userRole,
+                items: [
+                  DropdownMenuItem(child: Text('Quiero Contratar'), value: 1),
+                  DropdownMenuItem(
+                      child: Text('Quiero Brindar Mis Servicios'), value: 2)
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _userRole = value;
+                  });
+                })));
+  }
 
   Widget _loginOption(context) {
     return GestureDetector(
@@ -271,8 +271,8 @@ class _RegisterState extends State<Register> {
                 userUpdateInfo.displayName =
                     signUser.name + " " + signUser.lastname;
                 await user.updateProfile(userUpdateInfo);
-                await authBloc.createUserFirestore(
-                    user.uid, userUpdateInfo.displayName, "", user.email);
+                await authBloc.createUserFirestore(user.uid,
+                    userUpdateInfo.displayName, "", user.email, _userRole);
                 authBloc.setIsLoading(false);
                 Navigator.pushAndRemoveUntil(
                     context,

@@ -16,10 +16,10 @@ class AuthRepository {
   Future<AuthResult> createUserWithEmailAndPassword(SignInUser signInUser) =>
       _firebaseAuthAPI.createUserWithEmailAndPassword(signInUser);
 
-  Future<void> createUserFirestore(
-          String userId, String displayName, String photoURL, String email) =>
+  Future<void> createUserFirestore(String userId, String displayName,
+          String photoURL, String email, int role) =>
       _firebaseAuthAPI.createUserFirestore(
-          userId, displayName, photoURL, email);
+          userId, displayName, photoURL, email, role);
 
   Future<AuthResult> signInWithEmailAndPassword(
           String email, String password) =>

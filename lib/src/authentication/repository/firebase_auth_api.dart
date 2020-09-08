@@ -49,6 +49,7 @@ class FirebaseAuthAPI {
     String displayName,
     String photoURL,
     String email,
+    int role,
   ) {
     List<dynamic> collaborators = [];
     collaborators.add(userId);
@@ -62,6 +63,7 @@ class FirebaseAuthAPI {
       'displayName': displayName,
       'photoURL': photoURL,
       'email': email,
+      'role': role,
       'visible': true
     });
     return batch.commit();

@@ -69,9 +69,9 @@ class AuthBloc implements Bloc {
   }
 
   Future<void> createUserFirestore(
-      userId, displayName, String photoURL, String email) {
+      userId, displayName, String photoURL, String email, int role) {
     return _authRepository.createUserFirestore(
-        userId, displayName, photoURL, email);
+        userId, displayName, photoURL, email, role);
   }
 
   Future<void> saveFCMToken(String userId, String fcmToken) {
