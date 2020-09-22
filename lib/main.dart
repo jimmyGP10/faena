@@ -1,3 +1,4 @@
+import 'package:faena/src/faena.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:faena/src/authentication/bloc/bloc_auth.dart';
@@ -40,7 +41,7 @@ class _SesionHandlerState extends State<SesionHandler> {
             if (user == null) {
               return Login();
             } else {
-              return Home();
+              return Faena();
             }
           } else {
             return Login();

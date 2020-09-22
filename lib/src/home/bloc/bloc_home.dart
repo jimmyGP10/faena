@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:faena/src/home/models/category.dart';
+import 'package:faena/src/home/models/services.dart';
 import 'package:faena/src/home/repository/home_repository.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+
+import '../models/category.dart';
 
 class HomeBloc implements Bloc {
   final _homeRepository = HomeRepository();
@@ -10,18 +13,49 @@ class HomeBloc implements Bloc {
     return _homeRepository.getCategories();
   }
 
+  Stream<QuerySnapshot> getServices(String categoryId) {
+    return _homeRepository.getServices(categoryId);
+  }
+
+  Stream<DocumentSnapshot> getCategoryByID(String uid) {
+    return _homeRepository.getCategoryByID(uid);
+  }
+
+  Category buildCategoryDetail(DocumentSnapshot doc) {
+    Category category = Category(
+        uid: doc.documentID,
+        description: doc.data['description'],
+        name: doc.data['name'],
+        photoURL: doc.data['photoURL']);
+    return category;
+  }
+
   List<Category> buildListCategory(List<DocumentSnapshot> categoryList) {
     List<Category> category = List<Category>();
 
     categoryList.forEach((c) {
       category.add(Category(
+        uid: c.documentID,
         name: c.data['name'],
         description: c.data['description'],
         photoURL: c.data['photoURL'],
       ));
     });
-
     return category;
+  }
+
+  List<Service> buildListServices(List<DocumentSnapshot> serviceList) {
+    List<Service> service = List<Service>();
+    serviceList.forEach((c) {
+      service.add(Service(
+        uid: c.documentID,
+        name: c.data['name'],
+        category: c.data['category'],
+        logo: c.data['logo'],
+        schedule: c.data['schedule'],
+      ));
+    });
+    return service;
   }
 
   void dispose() {}

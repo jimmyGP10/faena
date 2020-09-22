@@ -2,7 +2,7 @@ import 'package:faena/src/authentication/bloc/bloc_auth.dart';
 import 'package:faena/src/authentication/model/sign-user.dart';
 import 'package:faena/src/authentication/ui/screens/login.dart';
 import 'package:faena/src/home/ui/screens/home.dart';
-import 'package:faena/src/widget/loading.dart';
+import 'package:faena/src/widgets/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

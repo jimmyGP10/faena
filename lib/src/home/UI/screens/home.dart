@@ -40,35 +40,20 @@ class _HomeState extends State<Home> {
               stream: homeBloc.getCategories(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                List<Category> category =
-                    homeBloc.buildListCategory(snapshot.data.documents);
-                return Carrousel(categoryList: category);
+                if (snapshot.hasData) {
+                  List<Category> category =
+                      homeBloc.buildListCategory(snapshot.data.documents);
+                  return Carrousel(categoryList: category);
+                } else {
+                  return Container();
+                }
               }),
           Container(
-              child: GestureDetector(
-                  child: Container(
-                      margin: EdgeInsets.only(
-                          top: 20, bottom: 10, left: 30, right: 30),
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        'Cerrar Sesión',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16),
-                      )),
-                  onTap: () {
-                    authBloc.signOut().then((onValue) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                          (Route<dynamic> route) => false);
-                    });
-                  })),
+            padding: EdgeInsets.all(20),
+            alignment: Alignment.topLeft,
+            child: Text('Mis Contratos',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          ),
         ]))));
   }
 }
