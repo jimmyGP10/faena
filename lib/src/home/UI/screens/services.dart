@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:faena/src/home/UI/screens/service-detail.dart';
 import 'package:faena/src/home/models/services.dart';
 import 'package:flutter/material.dart';
 import '../../bloc/bloc_home.dart';
@@ -83,14 +84,25 @@ class Services extends StatelessWidget {
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext context,
                                         int index) =>
-                                    Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                                bottom: BorderSide(
-                                                    width: 1,
-                                                    color: Colors.grey[300]))),
-                                        child: _serviceUI(services[index]))),
+                                    GestureDetector(
+                                        child: Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                border: Border(
+                                                    bottom: BorderSide(
+                                                        width: 1,
+                                                        color:
+                                                            Colors.grey[300]))),
+                                            child: _serviceUI(services[index])),
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ServiceDetail(
+                                                          uid: services[index]
+                                                              .uid)));
+                                        })),
                           ]));
                         }
                       } else {

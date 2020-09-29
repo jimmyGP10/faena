@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:faena/src/authentication/bloc/bloc_auth.dart';
 import 'package:faena/src/authentication/ui/screens/login.dart';
-import 'package:faena/src/home/ui/screens/home.dart';
 
 void main() {
   runApp(MyApp());

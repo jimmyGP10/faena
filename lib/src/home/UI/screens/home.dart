@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:faena/src/authentication/bloc/bloc_auth.dart';
-import 'package:faena/src/authentication/ui/screens/login.dart';
 import 'package:faena/src/home/UI/widgets/carrousel.dart';
 import 'package:faena/src/home/bloc/bloc_home.dart';
 import 'package:faena/src/home/models/category.dart';

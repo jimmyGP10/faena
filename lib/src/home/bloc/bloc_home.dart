@@ -21,6 +21,10 @@ class HomeBloc implements Bloc {
     return _homeRepository.getCategoryByID(uid);
   }
 
+  Stream<DocumentSnapshot> getServiceById(String uid) {
+    return _homeRepository.getServiceById(uid);
+  }
+
   Category buildCategoryDetail(DocumentSnapshot doc) {
     Category category = Category(
         uid: doc.documentID,
@@ -48,14 +52,28 @@ class HomeBloc implements Bloc {
     List<Service> service = List<Service>();
     serviceList.forEach((c) {
       service.add(Service(
-        uid: c.documentID,
-        name: c.data['name'],
-        category: c.data['category'],
-        logo: c.data['logo'],
-        schedule: c.data['schedule'],
-      ));
+          uid: c.documentID,
+          name: c.data['name'],
+          category: c.data['category'],
+          logo: c.data['logo'],
+          schedule: c.data['schedule'],
+          phone: c.data['phone'],
+          geoPos: c.data['geoPos']));
     });
     return service;
+  }
+
+  Service buildServiceDetail(DocumentSnapshot doc) {
+    Service category = Service(
+      uid: doc.documentID,
+      name: doc.data['name'],
+      category: doc.data['category'],
+      logo: doc.data['logo'],
+      schedule: doc.data['schedule'],
+      phone: doc.data['phone'],
+      geoPos: doc.data['geoPos'],
+    );
+    return category;
   }
 
   void dispose() {}

@@ -11,4 +11,7 @@ class HomeRepository {
 
   Stream<QuerySnapshot> getServices(String categoryId) =>
       _homeFirebaseApi.getServices(categoryId);
+
+  Stream<DocumentSnapshot> getServiceById(String uid) =>
+      _homeFirebaseApi.getServiceById(uid);
 }

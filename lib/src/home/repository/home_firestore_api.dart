@@ -16,4 +16,8 @@ class HomeFirebaseApi {
   Stream<DocumentSnapshot> getCategoryByID(String uid) {
     return _firestore.collection('categories').document(uid).snapshots();
   }
+
+  Stream<DocumentSnapshot> getServiceById(String uid) {
+    return _firestore.collection('services').document(uid).snapshots();
+  }
 }
