@@ -55,11 +55,13 @@ class _Login extends State<Login> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text(
-                      'Iniciar Sesión',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                    ),
+                    Container(
+                        width: 60,
+                        height: 80,
+                        margin: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('logo.png')))),
                     Container(
                         margin: EdgeInsets.only(top: 10),
                         child: _buildEmailTextFiel()),
@@ -92,7 +94,7 @@ class _Login extends State<Login> {
 
   Widget _createAppbar(context) {
     return AppBar(
-      elevation: 0.0,
+      title: Text('Iniciar Sesión', style: TextStyle(color: Colors.blue)),
       titleSpacing: 10.0,
       backgroundColor: Colors.white,
     );
