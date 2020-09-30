@@ -1,4 +1,5 @@
 import 'package:faena/src/settings/UI/screens/setting-home.dart';
+import 'package:faena/src/settings/UI/screens/settings_home.dart';
 import 'package:flutter/material.dart';
 
 import 'home/UI/screens/home.dart';
@@ -14,7 +15,7 @@ class _Faena extends State<Faena> with SingleTickerProviderStateMixin {
   int indexTap = 0;
   final List<Widget> widgetsChildren = [
     Home(),
-    SettingHome(),
+    SettingsHome(),
   ];
 
   void onTapTapped(int index) {

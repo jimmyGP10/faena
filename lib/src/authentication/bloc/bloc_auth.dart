@@ -7,6 +7,8 @@ import 'package:faena/src/authentication/repository/auth_repository.dart';
 
 import 'package:rxdart/rxdart.dart';
 
+import '../model/user.dart';
+
 class AuthBloc implements Bloc {
   final _authRepository = AuthRepository();
   final userUpdateInfo = UserUpdateInfo();
@@ -24,6 +26,24 @@ class AuthBloc implements Bloc {
   void setIsLoading(bool loading) => _loadingSubject.add(loading);
 
   Stream<FirebaseUser> get getUser => _authRepository.getUser();
+
+  Future<DocumentSnapshot> getUserById(String userUid) {
+    return _authRepository.getUserById(userUid);
+  }
+
+  User buildUser(DocumentSnapshot doc) {
+    User user;
+    var validateDoc = doc.data != null;
+    if (validateDoc) {
+      user = User(
+          uid: doc.documentID,
+          email: doc.data['email'],
+          displayName: doc.data['displayName'],
+          visible: doc.data['visible'],
+          photoURL: doc.data['photoURL']);
+    }
+    return user;
+  }
 
   //Future<FirebaseUser> currentUser = FirebaseAuth.instance.currentUser();
   Stream<FirebaseUser> get authStatus => _authRepository.onAuthStateChanged();

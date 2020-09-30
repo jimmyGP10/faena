@@ -13,6 +13,9 @@ class AuthRepository {
 
   Stream<FirebaseUser> getUser() => _firebaseAuthAPI.getUser();
 
+  Future<DocumentSnapshot> getUserById(String userUid) =>
+      _firebaseAuthAPI.getUserById(userUid);
+
   Future<AuthResult> createUserWithEmailAndPassword(SignInUser signInUser) =>
       _firebaseAuthAPI.createUserWithEmailAndPassword(signInUser);
 

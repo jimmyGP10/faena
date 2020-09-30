@@ -35,6 +35,10 @@ class FirebaseAuthAPI {
     return _auth.onAuthStateChanged;
   }
 
+  Future<DocumentSnapshot> getUserById(String userUid) {
+    return _firestore.collection('users').document(userUid).get();
+  }
+
   Future<AuthResult> signInWithEmailAndPassword(email, password) {
     return _auth.signInWithEmailAndPassword(email: email, password: password);
   }
